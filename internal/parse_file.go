@@ -49,7 +49,11 @@ func ParseFile(fileName string, modules ...modules.ModuleInterface) {
 			continue
 		}
 
-		timestamp := time.Time{}
+		timestamp, err := time.Parse("Mon Jan 2 15:04:05 MST 2006", row[0])
+		if err != nil {
+			log.Printf("error on line %d: could not load timestamp %s\n skipping record...\n", row[0], err.Error())
+		}
+
 		record := models.Row{
 			Timestamp: timestamp,
 			Username:  row[1],

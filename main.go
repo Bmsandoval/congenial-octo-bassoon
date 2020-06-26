@@ -15,6 +15,10 @@ func main() {
 
 	userAccessCount := modules.UserAccessCount{}
 	userAccessCount.Setup()
-	internal.ParseFile(os.Args[1], &userAccessCount)
+
+	uploadsOverFifty := modules.UploadsOverFifty{}
+	uploadsOverFifty.Setup()
+
+	internal.ParseFile(os.Args[1], &userAccessCount, &uploadsOverFifty)
 }
 
