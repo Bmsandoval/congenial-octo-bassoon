@@ -17,8 +17,11 @@ func TestParseFile(t *testing.T) {
 		uploadsOverFifty := modules.UploadsOverFifty{}
 		uploadsOverFifty.Setup()
 
-		result := pkg.CaptureOutput(internal.ParseFile, "sample_server_log_short.csv", &userAccessCount, &uploadsOverFifty)
-		assert.Equal(t, "User access count: 6\nUploads over 50kb: 19\n", result)
+		jeffsUploadCount := modules.JeffsUploadCount{}
+		jeffsUploadCount.Setup()
+
+		result := pkg.CaptureOutput(internal.ParseFile, "sample_server_log_short.csv", &userAccessCount, &uploadsOverFifty, &jeffsUploadCount)
+		assert.Equal(t, "User access count: 6\nUploads over 50kb: 8\nJeff's uploads on Apr 15th 2020: 2\n", result)
 	})
 }
 
@@ -29,9 +32,12 @@ func BenchmarkParseFile(b *testing.B) {
 	uploadsOverFifty := modules.UploadsOverFifty{}
 	uploadsOverFifty.Setup()
 
+	jeffsUploadCount := modules.JeffsUploadCount{}
+	jeffsUploadCount.Setup()
+
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		internal.ParseFile("sample_server_log.csv", &userAccessCount, &uploadsOverFifty)
+		internal.ParseFile("sample_server_log.csv", &userAccessCount, &uploadsOverFifty, &jeffsUploadCount)
 	}
 }

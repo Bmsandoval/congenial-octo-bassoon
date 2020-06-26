@@ -19,6 +19,7 @@ func TestUploadsOverFiftyModule(t *testing.T) {
 			Input: []models.Row {
 				{
 					 Size: 51,
+					 Operation: "upload",
 				},
 			},
 			Output: "Uploads over 50kb: 1\n",
@@ -28,9 +29,11 @@ func TestUploadsOverFiftyModule(t *testing.T) {
 			Input: []models.Row{
 				{
 					Size: 53,
+					Operation: "upload",
 				},
 				{
 					Size: 48,
+					Operation: "upload",
 				},
 			},
 			Output: "Uploads over 50kb: 1\n",
@@ -40,6 +43,17 @@ func TestUploadsOverFiftyModule(t *testing.T) {
 			Input: []models.Row{
 				{
 					Size: 45,
+					Operation: "upload",
+				},
+			},
+			Output: "Uploads over 50kb: 0\n",
+		},
+		{
+			Description: "test single download",
+			Input: []models.Row{
+				{
+					Size: 55,
+					Operation: "download",
 				},
 			},
 			Output: "Uploads over 50kb: 0\n",

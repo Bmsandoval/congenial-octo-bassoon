@@ -5,6 +5,7 @@ import (
 	"github.com/bmsandoval/congenial-octo-bassoon/internal/models"
 )
 
+// This module counts the number of distinct users who accessed the system
 type UserAccessCount struct {
 	UsersSeen map[string]bool
 }
