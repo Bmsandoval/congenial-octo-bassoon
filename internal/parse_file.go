@@ -2,6 +2,7 @@ package internal
 
 import (
 	"encoding/csv"
+	"fmt"
 	"github.com/bmsandoval/congenial-octo-bassoon/internal/models"
 	"github.com/bmsandoval/congenial-octo-bassoon/internal/modules"
 	"io"
@@ -65,6 +66,6 @@ func ParseFile(fileName string, modules ...modules.ModuleInterface) {
 	csvfile.Close()
 
 	for _, module := range modules {
-		module.Display()
+		fmt.Print(module.Display())
 	}
 }

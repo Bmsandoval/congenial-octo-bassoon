@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/bmsandoval/congenial-octo-bassoon/internal"
+	"github.com/bmsandoval/congenial-octo-bassoon/internal/modules"
 	"log"
 	"os"
 )
@@ -12,6 +13,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	internal.ParseFile(os.Args[1])
+	userAccessCount := modules.UserAccessCount{}
+	userAccessCount.Setup()
+	internal.ParseFile(os.Args[1], &userAccessCount)
 }
 

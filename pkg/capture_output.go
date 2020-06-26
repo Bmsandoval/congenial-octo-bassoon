@@ -11,7 +11,7 @@ import (
 
 // from medium article https://medium.com/@hau12a1/golang-capturing-log-println-and-fmt-println-output-770209c791b4
 // used to call my file parser and capture the os output for the sake of unit testing
-func CaptureOutput(f func(string, ...modules.ModuleInterface), input string) string {
+func CaptureOutput(f func(string, ...modules.ModuleInterface), input string, modules ...modules.ModuleInterface) string {
 	reader, writer, err := os.Pipe()
 	if err != nil {
 		panic(err)
@@ -36,7 +36,7 @@ func CaptureOutput(f func(string, ...modules.ModuleInterface), input string) str
 		out <- buf.String()
 	}()
 	wg.Wait()
-	f(input)
+	f(input, modules...)
 	writer.Close()
 	return <-out
 }

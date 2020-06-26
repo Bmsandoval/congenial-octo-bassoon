@@ -21,6 +21,10 @@ Options:
 "
         ;;
         'unit')
+          # Test main
+          go test .
+
+          # Test sub directories
           for directory in $( find . -type d | grep '/test$' ); do
             go test "${directory}" -coverpkg=./...
           done
